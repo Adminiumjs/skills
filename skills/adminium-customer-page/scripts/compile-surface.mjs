@@ -102,6 +102,18 @@ const TYPE_TO_TS = {
 
 console.log(`\n${manifest.name ?? manifest.key}  (${manifest.key})`);
 console.log('─'.repeat(64));
+/*
+ * Say which check ran on the PASS path too, not only when it fails. A scratch
+ * install has no `@adminiumjs/manifest`, so the structural check is the normal
+ * path for a non-cloner — and a clean pass they are told nothing about reads as
+ * a full validation, which is exactly the impression this script exists to deny.
+ */
+console.log(
+  validate === null
+    ? 'structural check only — `@adminiumjs/manifest` is not installed here, so this is\n'
+      + 'weaker than a full validation. Install it for the real one.'
+    : 'validated with `@adminiumjs/manifest`.',
+);
 
 console.log('\nSIDES');
 for (const f of manifest.frontends) {

@@ -38,9 +38,12 @@ may use. If the manifest does not validate, **stop and say so** — every line y
 after that point is a guess about a schema you have not seen. Fixing the manifest is the
 task; the page is not.
 
-Two of the fifteen repos (`factory-ops`, `hotel-reservations`) have contract manifests with
-no `pages` block. There the compiler will tell you what is missing, and authoring it is the
-job before this one.
+Some repos ship a **contract manifest** — `requiredSchema` and design notes, but no `pages`
+block — because authoring their pages is product work nobody has done yet. There the compiler
+names exactly what is missing, and supplying it is the job before this one.
+
+**Which repos those are changes over time, so do not carry a list in your head — run the
+compiler.** It reads the manifest in front of you; a remembered list does not.
 
 ## What to ask
 
