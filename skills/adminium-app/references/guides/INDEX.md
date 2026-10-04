@@ -10,7 +10,8 @@
 | `references/guides/manifest-by-task--a-choice-column.md` | A choice column | 1243 |
 | `references/guides/manifest-by-task--add-a-dashboard-page.md` | Add a dashboard page | 3042 |
 | `references/guides/manifest-by-task--add-a-role.md` | Add a role | 2153 |
-| `references/guides/manifest-by-task--let-customers-read-or-add.md` | Let customers read or add | 2531 |
+| `references/guides/manifest-by-task--let-customers-read-or-add.md` | Let customers read or add | 2783 |
+| `references/guides/manifest-by-task--let-a-customer-find-their-own-row.md` | Let a customer find their own row | 2981 |
 | `references/guides/manifest-by-task--sample-data.md` | Sample data | 1495 |
 | `references/guides/manifest-by-task--settings-the-operator-fills-in.md` | Settings the operator fills in | 1069 |
 | `references/guides/manifest-by-task--emails.md` | Emails | 721 |
@@ -18,7 +19,7 @@
 | `references/guides/manifest-by-task--values-adminium-fills-in.md` | Values Adminium fills in | 2450 |
 | `references/guides/manifest-by-task--things-a-manifest-cannot-do.md` | Things a manifest cannot do | 941 |
 | `references/guides/sample-data--overview.md` | Sample data | 414 |
-| `references/guides/sample-data--adding-it.md` | Adding it | 3115 |
+| `references/guides/sample-data--adding-it.md` | Adding it | 3778 |
 | `references/guides/sample-data--sample-times-that-follow-the-calendar.md` | Sample times that follow the calendar | 2543 |
 | `references/guides/sample-data--while-it-is-loaded.md` | While it is loaded | 664 |
 | `references/guides/sample-data--removing-it.md` | Removing it | 1435 |
@@ -88,6 +89,5 @@
 | `references/guides/undo-a-status-move--naming-the-state-it-saw.md` | Naming the state it saw | 1543 |
 | `references/guides/undo-a-status-move--only-shortly-after.md` | Only shortly after | 803 |
 | `references/guides/undo-a-status-move--stamps.md` | Stamps | 1494 |
-| `references/guides/undo-a-status-move--columns-the-move-back-empties.md` | Columns the move back empties | 1875 |
 
 More: `references/guides/INDEX-2.md`
