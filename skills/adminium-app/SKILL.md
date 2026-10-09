@@ -34,14 +34,14 @@ apps/<key>/
   tests/app.test.mjs  README.md     node --test apps/<key>/tests/app.test.mjs
 ```
 
-Then shape it into what was asked: rewrite the tables, pages, role and sample rows, and delete what
-the request does not need. Keep `publisher` as it is.
+Then shape it into what was asked: rewrite the tables, pages, role and sample rows, and delete
+what is not needed. Keep `publisher` as it is.
 
 ## 2. Which file holds what
 
 Read `references/projects/apps--the-manifest-as-parts.md` for the full table. In short: the app
-itself in `app.json`; one table per file; one page per file; `roles.json`, `settings.json`,
-`option-lists.json` and `documents.json` are the bare array or object; `access.json`,
+in `app.json`; one table per file; one page per file; `roles.json`, `settings.json`,
+`option-lists.json`, `documents.json` and `automations.json` are the bare array or object; `access.json`,
 `emails.json` and `sample.json` are objects holding their named fields. A file that is not a part
 is an error, and a table or page file is named after its `ref`.
 
@@ -49,8 +49,8 @@ is an error, and a table or page file is named after its `ref`.
 
 Open `references/INDEX.md`, find the task, read that one file.
 
-- `references/guides/manifest-by-task--*.md`: add a table, link two tables, a choice column, a
-  page, a role, customer access, sample data, settings, emails. Start here.
+- `references/guides/manifest-by-task--*.md`: a table, a link, a choice column, a page, a role,
+  customer access, sample data, settings, emails, stock or discounts from an add-on. Start here.
 - `references/manifest/*.md`: the full reference, by section, when the task guide is not enough.
 
 Rules that catch people:
@@ -59,7 +59,7 @@ Rules that catch people:
   prints a `!` for it (unless a rule fills it). Give it a default or make it nullable. When you
   mean it to be required, leave it: a `!` is advice, and you say which ones are meant.
 - A page's `ref` is its address in the dashboard, shared by every installed app: start it with
-  the app's key.
+  its key.
 - A page's `nav.group` names a `key` in `app.json`'s `navGroups`.
 - A `page-board` needs a status column with at least two of Adminium's workflow words as values
   (`new`, `in_progress`, `done`, …; the list is in the page task guide). Otherwise the page is
@@ -82,7 +82,7 @@ that list is the app's whole public surface.
 ## 5. Sample data
 
 `seeds/sample.json` (format `adminium.sample/1`) holds a few believable rows per table, parents
-before children. Keep it small. **run** adds it once; an install adds it only when asked.
+before children. **run** adds it once; an install adds it only when asked.
 
 ## 6. Run it, prove it, pack it
 
@@ -101,8 +101,8 @@ contents. Raise `version` in `app.json` before packing a change to an installed 
 
 ## 7. Say what you built
 
-End with: the rung, the tables and pages, the roles, what customers may reach (from **check**), the
-result of **try**, how to **run** it, and anything asked for that Adminium cannot do.
+End with: the rung, the tables and pages, the roles, what customers may reach (from **check**),
+the result of **try**, how to **run** it, and what was asked that Adminium cannot do.
 
 ## What an app cannot do
 

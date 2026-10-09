@@ -8,8 +8,9 @@
 | `references/guides/building-a-side--the-folder.md` | The folder | 1269 |
 | `references/guides/building-a-side--the-look.md` | The look | 2448 |
 | `references/guides/building-a-side--the-two-sides-are-not-alike.md` | The two sides are not alike | 792 |
-| `references/guides/building-a-side--a-staff-side.md` | A staff side | 3317 |
+| `references/guides/building-a-side--a-staff-side.md` | A staff side | 3450 |
 | `references/guides/building-a-side--a-customer-side.md` | A customer side | 3718 |
+| `references/guides/building-a-side--pages-and-their-addresses.md` | Pages and their addresses | 3134 |
 | `references/guides/building-a-side--the-venue-s-clock-and-money.md` | The venue's clock and money | 769 |
 | `references/guides/building-a-side--looking-at-a-side-without-adminium.md` | Looking at a side without Adminium | 1224 |
 | `references/guides/building-a-side--what-a-served-screen-may-not-load.md` | What a served screen may not load | 783 |
@@ -29,6 +30,7 @@
 | `references/guides/public-access--limits-on-a-stranger-s-create.md` | Limits on a stranger's create | 2319 |
 | `references/guides/public-access--a-kiosk.md` | A kiosk | 2376 |
 | `references/guides/public-access--switches-in-the-settings-row.md` | Switches in the settings row | 915 |
+| `references/guides/public-access--what-an-add-on-adds.md` | What an add-on adds | 2366 |
 | `references/guides/public-access--what-the-app-s-keys-can-never-do.md` | What the app's keys can never do | 1221 |
 | `references/guides/public-access--when-it-stops-answering.md` | When it stops answering | 710 |
 | `references/guides/public-access--origins.md` | Origins | 853 |
@@ -60,9 +62,9 @@
 | `references/guides/roles-and-staff-access--who-may-open-an-app-s-staff-screens.md` | Who may open an app's staff screens | 848 |
 | `references/guides/roles-and-staff-access--the-roles-an-app-brings.md` | The roles an app brings | 1326 |
 | `references/guides/roles-and-staff-access--personal-data.md` | Personal data | 1375 |
-| `references/guides/roles-and-staff-access--edits-limited-to-some-columns.md` | Edits limited to some columns | 1986 |
+| `references/guides/roles-and-staff-access--edits-limited-to-some-columns.md` | Edits limited to some columns | 2384 |
 | `references/guides/roles-and-staff-access--reads-limited-to-some-columns.md` | Reads limited to some columns | 1696 |
-| `references/guides/roles-and-staff-access--people-who-only-use-the-app.md` | People who only use the app | 1106 |
+| `references/guides/roles-and-staff-access--people-who-only-use-the-app.md` | People who only use the app | 1310 |
 | `references/guides/roles-and-staff-access--someone-without-access.md` | Someone without access | 902 |
 | `references/guides/roles-and-staff-access--signing-in-on-the-app-s-own-address.md` | Signing in on the app's own address | 1762 |
 | `references/guides/orders-with-lines--overview.md` | An order with its lines | 1439 |
@@ -73,6 +75,7 @@
 | `references/guides/orders-with-lines--the-price-check.md` | The price check | 1152 |
 | `references/guides/orders-with-lines--retries.md` | Retries | 1973 |
 | `references/guides/orders-with-lines--what-a-guest-is-told.md` | What a guest is told | 2002 |
+| `references/guides/orders-with-lines--what-a-price-was-reduced-by.md` | What a price was reduced by | 1259 |
 | `references/guides/orders-with-lines--limits-on-a-stranger-s-order.md` | Limits on a stranger's order | 2002 |
 | `references/guides/orders-with-lines--tickets-for-a-show.md` | Tickets for a show | 1044 |
 | `references/guides/orders-with-lines--a-stay-and-its-extras.md` | A stay and its extras | 898 |
@@ -82,9 +85,5 @@
 | `references/guides/booking-rules--when-a-time-can-be-booked.md` | When a time can be booked | 2730 |
 | `references/guides/booking-rules--the-venue-s-clock.md` | The venue's clock | 398 |
 | `references/guides/booking-rules--late-cancellations.md` | Late cancellations | 963 |
-| `references/guides/booking-rules--what-availability-answers.md` | What availability answers | 2521 |
-| `references/guides/booking-rules--what-a-writer-is-told.md` | What a writer is told | 1372 |
-| `references/guides/booking-rules--booking-rules-and-capacity.md` | Booking rules and capacity | 779 |
-| `references/guides/booking-rules--limits.md` | Limits | 1061 |
 
 More: `references/guides/INDEX-2.md`

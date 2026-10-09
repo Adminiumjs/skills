@@ -2,44 +2,6 @@
 
 # Manifest spec: requiredSchema — Column rules
 
-- **Exactly.** Every value is read from its decimal text as an exact fraction, and nothing goes
-  through a floating-point number. `1 ÷ 3 × 3` is exactly 1, and a total is the same on Postgres,
-  MySQL and SQLite to the last minor unit.
-- **Rounded once**, half away from zero, to the column's [scale](https://docs.adminium.dev/reference/manifest/#decimal-places). A formula
-  column with no `scale` rounds to 0 places when it is an `int` or `bigint`, and to 4 when it is a
-  decimal. `round` inside a formula rounds that part early, where the arithmetic calls for it (a
-  tax rounded before it is added).
-- **Empty in, empty out.** An empty column makes the result empty unless `coalesce` says what to
-  read instead: a draft line with no rate yet has no amount, rather than an amount of 0 that looks
-  like a price.
-- **On every write.** A create works out every formula; an update works out the ones whose inputs
-  it changed, reading the stored row with the new values over it. A formula that reads another
-  formula column is worked out after it. A formula that reads a [rollup](https://docs.adminium.dev/reference/manifest/#totals-and-balances)
-  total is worked out again whenever the total moves.
-
-A formula fills a `decimal`, `money`, `int` or `bigint` column, never a `float` (a
-[`join`](https://docs.adminium.dev/reference/manifest/#joined-text) fills a `text` column). It reads only columns of its own table, and every
-column it counts with holds a number; `eq`, `neq` and `isNull` may name any column,
-`hoursBetween` names two different `timestamptz` columns and `daysBetween` two different `date`
-columns. It
-may not read itself, formulas may not read each other in a circle, and an expression nests at most
-8 deep. A value a writer sends to a formula column is dropped. Anything that reads another row is a
-`copy` or a `rollup`, which already keep in step when that other row changes.
-
-#### Hours between two moments
-
-`hoursBetween` works a time entry's hours out from its start and its stop:
-
-```json
-{ "ref": "hours", "type": "decimal", "scale": 2, "nullable": true,
-  "rules": { "formula": { "hoursBetween": ["started_at", "stopped_at"] } } }
-```
-
-09:15 → 11:45 is `2.50`; 22:30 → 01:15 the next day is `2.75`. The hours are exact and rounded
-once to the column's scale, like any formula, and they can be counted with further:
-`{ "mul": [{ "hoursBetween": ["started_at", "stopped_at"] }, "rate"] }` is the pay at a rate. An
-update that moves only the stop works the hours out again from the start as stored.
-
 - **The time that passed.** Hours are real elapsed time. A column that keeps a zone (Postgres
   `timestamptz`, MySQL `TIMESTAMP`) holds the moment itself. One that keeps none (MySQL `DATETIME`,
   which is what an app's `timestamptz` column becomes on MySQL, Postgres `timestamp`, and SQLite
@@ -119,3 +81,43 @@ every writer but an import. A numbered row's create is never undone: undo is ref
 number once taken stays taken; void the row instead.
 
 `format` writes the number as text in the same statement:
+
+| Field | Rule |
+|---|---|
+| `from` | The row's numbered column (one with a `gapless` sequence). |
+| `prefix` | Up to 12 letters, digits and `- _ / .` (`INV-`). |
+| `prefixSetting` | The prefix, read from a [setting](https://docs.adminium.dev/reference/manifest/#values-from-elsewhere) when the row is made. Not with `prefix`. A change applies to the next number. |
+| `pad` | The digits are padded with zeros to this many (0–12). |
+
+The `format` column is `text` and nullable, and its `maxLength` must hold the prefix and the
+padding. Give the text a `unique` constraint, as the example does: a second guard against a
+number twice, which MySQL's numbering also leans on.
+
+An import brings its own history: it keeps the numbers its rows carry, and a row that carries only
+the text, written as the table's prefix followed by digits, gets the number from those digits.
+The series then carries on after the largest. Sample rows spell a gapless number `null`, so they
+stay off the real series; see [Sample data](https://docs.adminium.dev/reference/manifest/#sample-data).
+
+#### Values from elsewhere
+
+A `default` rule fills a column on a create that leaves it empty, with a value read when the row is
+made:
+
+```json
+{ "ref": "currency", "type": "text", "maxLength": 3, "nullable": true,
+  "rules": { "default": { "from": "connection.currency" } } },
+{ "ref": "tax_rate", "type": "decimal", "scale": 3, "nullable": true,
+  "rules": { "default": { "from": { "addOn": "invoices", "setting": "default_tax_rate" } } } }
+```
+
+`from` is one of:
+
+| `from` | Reads |
+|---|---|
+| `"connection.currency"` | The connection's currency, a three-letter code. The column is `text` of at least 3 characters. |
+| `{ "table", "column" }` | A column of the app's one-row settings table. |
+| `{ "addOn", "setting" }` | A setting of an add-on. The app must require that add-on in [`addOns.requires`](https://docs.adminium.dev/reference/manifest/#add-ons), so the setting is always there. |
+
+The same three settings (the last two) are what `sequence.startSetting` and `format.prefixSetting`
+read. A column with a `default` rule is nullable: when there is nothing to read, it stays empty
+rather than taking a made-up value. An update never refills it.

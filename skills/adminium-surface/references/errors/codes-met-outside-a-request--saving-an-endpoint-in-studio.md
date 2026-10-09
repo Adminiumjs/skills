@@ -1,25 +1,6 @@
-<!-- produced from apps/docs/src/content/docs/reference/errors.md § Codes met outside a request; do not edit -->
+<!-- produced from apps/docs/src/content/docs/reference/errors.md § Codes met outside a request — Saving an endpoint in Studio; do not edit -->
 
-# Error codes: Codes met outside a request
-
-### An email that is not sent
-
-An email is never sent without its list. When the table or link an [email that lists
-rows](https://docs.adminium.dev/reference/manifest/#emails-that-list-rows) reads is gone (after a rename, say), the outbox
-row is marked `failed` with the sentence "Not sent: the email lists rows from a table or link that
-is not there" in its error column. This is text on the row, not an HTTP code. An empty list still
-sends. The other sentences are in [app emails](https://docs.adminium.dev/guides/apps/emails/#sending).
-
-### An app's install check
-
-`POST /apps/plan` lists what stops an install in `problems`, each with a `code`, `table` and
-`column`. An install that meets one is refused `422` `VALIDATION_FAILED` with
-`details.reason: "PLAN_REFUSED"` and the same `problems`.
-
-| Code | Meaning |
-|---|---|
-| `UNIQUE_DUPLICATES` | A unique rule the install adds, which rows already in the table break. Make them differ, then check again. |
-| `UNIQUE_KEY_TOO_LONG` | On MySQL, a unique column or set of columns wider than MySQL can index (3072 bytes together, 768 characters for one text column). Make the text columns shorter. |
+# Error codes: Codes met outside a request — Saving an endpoint in Studio
 
 ### Saving an endpoint in Studio
 

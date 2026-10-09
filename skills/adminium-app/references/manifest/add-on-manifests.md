@@ -6,11 +6,17 @@ An add-on manifest has `"kind": "add-on"` and shares the identity fields, `compa
 `capabilities`, `settings`, `widgets` and `requiredSchema` with an app. It differs in these ways:
 
 - **Categories** come from a separate list: `artwork`, `delivery`, `payments`, `email`, `data`.
-- **No `pages`, `roles`, `frontends`**, and none of `navGroups`, `optionLists`, `publicAccess`,
-  `publicKeys`, `outbox`, `emailTemplates`, `sampleData`, `seeds`, `addOns` or `documents`. An
-  add-on's own screens are code it ships, declared under `addOn.pages`.
-- **`requiredSchema` is optional** and cannot be `prefixed`: an add-on uses its host app's
-  tables. Tables an add-on creates are kept when it is disconnected.
+- **No `frontends`**, no `addOns.requires` and no `addOns.features`: an add-on has no screens
+  outside the dashboard and never requires another add-on (it may `suggests` one).
+- **An add-on that keeps tables of its own** sets `compatibility.minAdminiumVersion` to `0.3.18`
+  or later and `requiredSchema.prefixed` to `true`. It may then declare, in an app's words,
+  `pages`, `navGroups`, `roles`, `optionLists`, `documents`, `seeds`, `outbox`, `emailTemplates`,
+  `sampleData`, `publicAccess` and `publicKeys`. See
+  [below](https://docs.adminium.dev/reference/manifest/#an-add-on-with-tables-of-its-own). An add-on released before that floor declares none
+  of them and installs exactly as it always did: it uses its host app's tables, or creates
+  unprefixed ones that are kept when it is disconnected.
+- **A page's `ref` starts with the add-on's key** (`stock-kit-items`), so no two add-ons, and no
+  add-on and app, can declare the same page.
 - **An `addOn` block** is required:
 
 | Field | Required | Rule |
@@ -25,31 +31,13 @@ An add-on manifest has `"kind": "add-on"` and shares the identity fields, `compa
 | `network` | no | `{ "allow": [hostnames] }`: the exact HTTPS hosts its server code may call. Required, and non-empty, with the `outbound-http` capability. No wildcards, IP addresses or ports. |
 | `publicSettings` | no | The setting keys its browser code may read. Never a `secret` setting. |
 | `demoTransport` | no | The module that stands in for the real third-party service in a demo. |
-| `pages` | no | Dashboard pages it renders from its own bundle: `{ "ref", "title", "icon", "client", "nav"?, "detail"? }`, served at `/add-ons/<key>/<ref>`. Needs `hostApi`. |
-| `navGroups` | no | Sidebar groups for those pages: `{ "key", "label", "order" }`. A group may not reuse a built-in key (`workspace`, `library`, `planning`, `people`, `account`), and every declared group must be used by a page. |
-| `hostApi` | with `pages` | The version of the host API its pages are built against: `1`. |
+| `pages` | no | Dashboard pages it renders from its own bundle: `{ "ref", "title", "titles"?, "icon", "client", "nav"?, "detail"? }`, served at `/add-ons/<key>/<ref>`. Needs `hostApi`. `titles` is the title in the other languages, by tag (`{ "de-DE": "Zählen" }`): the sidebar is drawn before the page's code loads, so a title that is only in the bundle's own strings shows in English. |
+| `navGroups` | no | Sidebar groups for those pages: `{ "key", "label", "labels"?, "order" }` (`labels`: the label in the other languages, by tag). A group may not reuse a built-in key (`workspace`, `library`, `planning`, `people`, `account`), and every declared group must be used by a page. |
+| `hostApi` | with `pages` | The version of the host API its pages are built against: `1`, or `2` for a page that reads the [data kit](https://docs.adminium.dev/guides/add-ons-with-tables/#the-data-kit). `2` needs `compatibility.minAdminiumVersion` `0.3.18` or later. |
+| `words` | no | 1–4 questions asked of a ledger with nothing written. See [Stock words](https://docs.adminium.dev/reference/manifest/#stock-words). |
+| `recordTabs` | no | 1–6 tabs of its rows shown on another table's record. See [A tab on another table's record](https://docs.adminium.dev/reference/manifest/#a-tab-on-another-tables-record). |
 | `shapes` | no | 1–8 shapes apps build their tables on. See below. |
 
 Contract ids and slot ids come from closed registries in the add-on contracts package. How
 Adminium runs add-on code, and why only first-party add-ons are accepted, is explained in
 [Add-on trust](https://docs.adminium.dev/anatomy/decisions/add-on-trust/).
-
-### Shapes
-
-A shape is what an app's tables are [built on](https://docs.adminium.dev/reference/manifest/#tables-built-on-an-add-ons-shape): named parts, each
-with its columns, rules and states, the document profiles made for an app's tables, and the
-messages an app built on it sends.
-
-| Field | Required | Rule |
-|---|---|---|
-| `name` | yes | kebab-case. An app names the shape `<add-on key>/<name>@<version>`. |
-| `version` | yes | 1–99. A change an app's tables cannot follow is a new version. |
-| `parts` | yes | At least one, keyed by a snake_case part name: `{ "columns", "states"? }`, with 1–60 [columns](https://docs.adminium.dev/reference/manifest/#columns) and optional [states](https://docs.adminium.dev/reference/manifest/#states). |
-| `documentProfiles` | no | Up to 8 [documents](https://docs.adminium.dev/reference/manifest/#documents), each naming the `part` it is drawn for instead of a `table`, with no `addOn` and no `feature`. |
-| `outbox` | no | `{ "producers", "templates"? }`: 1–16 [producers](https://docs.adminium.dev/reference/manifest/#outbox), whose tables are the shape's parts, and up to 16 templates, each an [email template](https://docs.adminium.dev/reference/manifest/#emailtemplates) with a `kind` (the producer's) instead of a `key`. |
-
-A part is checked the way an app's tables are, with the parts of all the add-on's shapes as the
-tables. A column's `references` names another part of the same shape (`"document"`), or a part of
-another of the add-on's shapes (`"quote@1/document"`). A rule in a part that reads a setting reads
-one of the add-on's own (`{ "addOn": "<its key>", "setting" }`), since the add-on cannot know an
-app's settings row.

@@ -9,6 +9,7 @@
 | `references/guides/manifest-by-task--link-two-tables.md` | Link two tables | 2004 |
 | `references/guides/manifest-by-task--a-choice-column.md` | A choice column | 1243 |
 | `references/guides/manifest-by-task--add-a-dashboard-page.md` | Add a dashboard page | 3042 |
+| `references/guides/manifest-by-task--buttons-on-a-record-page.md` | Buttons on a record page | 1587 |
 | `references/guides/manifest-by-task--add-a-role.md` | Add a role | 2153 |
 | `references/guides/manifest-by-task--let-customers-read-or-add.md` | Let customers read or add | 2783 |
 | `references/guides/manifest-by-task--let-a-customer-find-their-own-row.md` | Let a customer find their own row | 2981 |
@@ -16,21 +17,24 @@
 | `references/guides/manifest-by-task--settings-the-operator-fills-in.md` | Settings the operator fills in | 1069 |
 | `references/guides/manifest-by-task--emails.md` | Emails | 721 |
 | `references/guides/manifest-by-task--build-on-an-add-on.md` | Build on an add-on | 1236 |
+| `references/guides/manifest-by-task--stock-from-the-inventory-add-on.md` | Stock from the Inventory add-on | 2189 |
+| `references/guides/manifest-by-task--discounts-codes-and-gift-cards-from-the-offers-add-on.md` | Discounts, codes and gift cards from the Offers add-on | 2174 |
 | `references/guides/manifest-by-task--values-adminium-fills-in.md` | Values Adminium fills in | 2450 |
 | `references/guides/manifest-by-task--things-a-manifest-cannot-do.md` | Things a manifest cannot do | 941 |
 | `references/guides/sample-data--overview.md` | Sample data | 414 |
 | `references/guides/sample-data--adding-it.md` | Adding it | 3778 |
 | `references/guides/sample-data--sample-times-that-follow-the-calendar.md` | Sample times that follow the calendar | 2543 |
+| `references/guides/sample-data--rows-for-an-add-on-the-app-names.md` | Rows for an add-on the app names | 2223 |
 | `references/guides/sample-data--while-it-is-loaded.md` | While it is loaded | 664 |
-| `references/guides/sample-data--removing-it.md` | Removing it | 1435 |
+| `references/guides/sample-data--removing-it.md` | Removing it | 1954 |
 | `references/guides/sample-data--on-uninstall.md` | On uninstall | 453 |
 | `references/guides/roles-and-staff-access--overview.md` | App roles and staff access | 346 |
 | `references/guides/roles-and-staff-access--who-may-open-an-app-s-staff-screens.md` | Who may open an app's staff screens | 848 |
 | `references/guides/roles-and-staff-access--the-roles-an-app-brings.md` | The roles an app brings | 1326 |
 | `references/guides/roles-and-staff-access--personal-data.md` | Personal data | 1375 |
-| `references/guides/roles-and-staff-access--edits-limited-to-some-columns.md` | Edits limited to some columns | 1986 |
+| `references/guides/roles-and-staff-access--edits-limited-to-some-columns.md` | Edits limited to some columns | 2384 |
 | `references/guides/roles-and-staff-access--reads-limited-to-some-columns.md` | Reads limited to some columns | 1696 |
-| `references/guides/roles-and-staff-access--people-who-only-use-the-app.md` | People who only use the app | 1106 |
+| `references/guides/roles-and-staff-access--people-who-only-use-the-app.md` | People who only use the app | 1310 |
 | `references/guides/roles-and-staff-access--someone-without-access.md` | Someone without access | 902 |
 | `references/guides/roles-and-staff-access--signing-in-on-the-app-s-own-address.md` | Signing in on the app's own address | 1762 |
 | `references/guides/settings--overview.md` | An app's settings page | 769 |
@@ -49,6 +53,7 @@
 | `references/guides/orders-with-lines--the-price-check.md` | The price check | 1152 |
 | `references/guides/orders-with-lines--retries.md` | Retries | 1973 |
 | `references/guides/orders-with-lines--what-a-guest-is-told.md` | What a guest is told | 2002 |
+| `references/guides/orders-with-lines--what-a-price-was-reduced-by.md` | What a price was reduced by | 1259 |
 | `references/guides/orders-with-lines--limits-on-a-stranger-s-order.md` | Limits on a stranger's order | 2002 |
 | `references/guides/orders-with-lines--tickets-for-a-show.md` | Tickets for a show | 1044 |
 | `references/guides/orders-with-lines--a-stay-and-its-extras.md` | A stay and its extras | 898 |
@@ -82,12 +87,5 @@
 | `references/guides/timed-moves--moves-that-wait-for-a-time.md` | Moves that wait for a time | 1130 |
 | `references/guides/timed-moves--late-moves.md` | Late moves | 1872 |
 | `references/guides/timed-moves--reminders-at-a-wall-time.md` | Reminders at a wall time | 1173 |
-| `references/guides/timed-moves--settings-a-moment-reads.md` | Settings a moment reads | 1274 |
-| `references/guides/timed-moves--what-a-writer-is-told.md` | What a writer is told | 1166 |
-| `references/guides/undo-a-status-move--overview.md` | Undo a status move | 827 |
-| `references/guides/undo-a-status-move--a-move-back.md` | A move back | 1481 |
-| `references/guides/undo-a-status-move--naming-the-state-it-saw.md` | Naming the state it saw | 1543 |
-| `references/guides/undo-a-status-move--only-shortly-after.md` | Only shortly after | 803 |
-| `references/guides/undo-a-status-move--stamps.md` | Stamps | 1494 |
 
 More: `references/guides/INDEX-2.md`

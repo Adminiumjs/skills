@@ -2,6 +2,12 @@
 
 # Manifest spec: Documents
 
+When a table is [built on an add-on's shape](https://docs.adminium.dev/reference/manifest/#tables-built-on-an-add-ons-shape), the shape's own
+profiles are made for it at install. An app entry of the same kind on that table does not make a
+second profile: its slots are added to the shape's mapping (the app's slot wins on the same name,
+so an invoice can print the client's address from the app's own `clients` table), and its `name`
+replaces the shape's.
+
 The app's staff screens ask for a document by the app's own names:
 `POST /api/v1/apps/<key>/documents/render` with `{ "kind", "ref", "pk", "period"?, "locale"?, "values"? }`,
 where `ref` is the table's short ref and `pk` the row's key. `values` fills the slots the entry
@@ -15,6 +21,3 @@ already drawn is handed back while the row is unchanged, with `contentUrl` for i
 document reads, a statement's sources included. An app, kind, row or table they cannot reach is
 the one `404`; an add-on that is detached, or a feature switched off, is `409` `FEATURE_OFF`; a
 document that cannot be drawn (a required slot left empty) is `422` `DOCUMENT_NOT_DRAWN`.
-
-A signed-in person reaches the documents of their own rows through a [public entry's
-`documents`](https://docs.adminium.dev/reference/manifest/#public-access).

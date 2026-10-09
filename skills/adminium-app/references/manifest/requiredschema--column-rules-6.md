@@ -2,46 +2,6 @@
 
 # Manifest spec: requiredSchema — Column rules
 
-| Field | Rule |
-|---|---|
-| `from` | The row's numbered column (one with a `gapless` sequence). |
-| `prefix` | Up to 12 letters, digits and `- _ / .` (`INV-`). |
-| `prefixSetting` | The prefix, read from a [setting](https://docs.adminium.dev/reference/manifest/#values-from-elsewhere) when the row is made. Not with `prefix`. A change applies to the next number. |
-| `pad` | The digits are padded with zeros to this many (0–12). |
-
-The `format` column is `text` and nullable, and its `maxLength` must hold the prefix and the
-padding. Give the text a `unique` constraint, as the example does: a second guard against a
-number twice, which MySQL's numbering also leans on.
-
-An import brings its own history: it keeps the numbers its rows carry, and a row that carries only
-the text, written as the table's prefix followed by digits, gets the number from those digits.
-The series then carries on after the largest. Sample rows spell a gapless number `null`, so they
-stay off the real series; see [Sample data](https://docs.adminium.dev/reference/manifest/#sample-data).
-
-#### Values from elsewhere
-
-A `default` rule fills a column on a create that leaves it empty, with a value read when the row is
-made:
-
-```json
-{ "ref": "currency", "type": "text", "maxLength": 3, "nullable": true,
-  "rules": { "default": { "from": "connection.currency" } } },
-{ "ref": "tax_rate", "type": "decimal", "scale": 3, "nullable": true,
-  "rules": { "default": { "from": { "addOn": "invoices", "setting": "default_tax_rate" } } } }
-```
-
-`from` is one of:
-
-| `from` | Reads |
-|---|---|
-| `"connection.currency"` | The connection's currency, a three-letter code. The column is `text` of at least 3 characters. |
-| `{ "table", "column" }` | A column of the app's one-row settings table. |
-| `{ "addOn", "setting" }` | A setting of an add-on. The app must require that add-on in [`addOns.requires`](https://docs.adminium.dev/reference/manifest/#add-ons), so the setting is always there. |
-
-The same three settings (the last two) are what `sequence.startSetting` and `format.prefixSetting`
-read. A column with a `default` rule is nullable: when there is nothing to read, it stays empty
-rather than taking a made-up value. An update never refills it.
-
 A `{ "table", "column" }` setting, wherever a rule reads one (a default, a limit's size, a move's
 condition, a moment's time), names a table that holds **one row**: the outbox's
 [`settings.table`](https://docs.adminium.dev/reference/manifest/#outbox), or a table that stands alone, with no foreign key of its own, none
@@ -114,3 +74,23 @@ always works it out. A change works it out again only when it writes the dates o
 to something new, so rates edited later never re-price a stay already booked, and a form that
 sends the whole row back keeps the booked price. An import keeps a figure it brings and works out
 one it leaves out. Formulas read the price (a subtotal, the tax, the total), so they run after it.
+
+The nights themselves are worked out, never stored: a dry run answers them (`date`, `rate`,
+`base`, `tags`), staff read them at `GET /api/v1/data/<connection>/<table>/<id>/nightly`, and a
+[document](https://docs.adminium.dev/reference/manifest/#documents) can list them. When the rates changed after the stay was priced, the lines
+come back as one line equal to the stored figure, so a folio never prints lines that disagree with
+its total. A rate rule that cannot be read refuses the write `409` `NIGHTLY_RATE_UNREADABLE`.
+
+#### Typed codes
+
+A `lookup` fills a foreign key from a code a person types: a discount code on an order, a presale
+code on a ticket. The browser never names the codes row itself; Adminium finds it.
+
+```json
+{ "ref": "promo_code", "type": "text", "maxLength": 32, "nullable": true },
+{ "ref": "promo_id", "type": "fk", "references": "promo_codes", "nullable": true,
+  "rules": { "lookup": { "from": "promo_code", "table": "promo_codes", "column": "code",
+                         "where": [{ "column": "active", "eq": true },
+                                   { "column": "valid_until", "notBefore": "today", "orEmpty": true }],
+                         "scope": [{ "column": "event_id", "equals": "event_id", "orEmpty": true }] } } }
+```

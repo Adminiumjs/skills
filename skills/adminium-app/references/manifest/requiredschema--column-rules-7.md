@@ -2,26 +2,6 @@
 
 # Manifest spec: requiredSchema — Column rules
 
-The nights themselves are worked out, never stored: a dry run answers them (`date`, `rate`,
-`base`, `tags`), staff read them at `GET /api/v1/data/<connection>/<table>/<id>/nightly`, and a
-[document](https://docs.adminium.dev/reference/manifest/#documents) can list them. When the rates changed after the stay was priced, the lines
-come back as one line equal to the stored figure, so a folio never prints lines that disagree with
-its total. A rate rule that cannot be read refuses the write `409` `NIGHTLY_RATE_UNREADABLE`.
-
-#### Typed codes
-
-A `lookup` fills a foreign key from a code a person types: a discount code on an order, a presale
-code on a ticket. The browser never names the codes row itself; Adminium finds it.
-
-```json
-{ "ref": "promo_code", "type": "text", "maxLength": 32, "nullable": true },
-{ "ref": "promo_id", "type": "fk", "references": "promo_codes", "nullable": true,
-  "rules": { "lookup": { "from": "promo_code", "table": "promo_codes", "column": "code",
-                         "where": [{ "column": "active", "eq": true },
-                                   { "column": "valid_until", "notBefore": "today", "orEmpty": true }],
-                         "scope": [{ "column": "event_id", "equals": "event_id", "orEmpty": true }] } } }
-```
-
 | Field | Rule |
 |---|---|
 | `from` | The nullable `text` column of this row the code is typed into, up to 64 characters, with no rule of its own that decides it. |

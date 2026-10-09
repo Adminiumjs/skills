@@ -4,10 +4,43 @@
 
 | File | What it covers | Bytes |
 |---|---|---|
+| `references/guides/timed-moves--settings-a-moment-reads.md` | Settings a moment reads | 1274 |
+| `references/guides/timed-moves--a-hold-that-nobody-finishes.md` | A hold that nobody finishes | 1060 |
+| `references/guides/timed-moves--what-a-writer-is-told.md` | What a writer is told | 1166 |
+| `references/guides/postings--overview.md` | Rows that post into an add-on's ledger | 874 |
+| `references/guides/postings--a-posting.md` | A posting | 1971 |
+| `references/guides/postings--the-moment-a-phase-fires.md` | The moment a phase fires | 1040 |
+| `references/guides/postings--the-lines-of-an-order.md` | The lines of an order | 1707 |
+| `references/guides/postings--put-it-back-first.md` | Put it back first | 1194 |
+| `references/guides/postings--a-hold-has-an-end.md` | A hold has an end | 1103 |
+| `references/guides/postings--what-a-rule-cannot-stand-on.md` | What a rule cannot stand on | 749 |
+| `references/guides/postings--every-way-of-writing-a-row.md` | Every way of writing a row | 1718 |
+| `references/guides/postings--trying-a-save-first.md` | Trying a save first | 868 |
+| `references/guides/postings--when-the-add-on-cannot-be-asked.md` | When the add-on cannot be asked | 1366 |
+| `references/guides/postings--what-the-owner-can-change.md` | What the owner can change | 753 |
+| `references/guides/postings--what-a-writer-is-told.md` | What a writer is told | 1569 |
+| `references/guides/discounts-and-codes--overview.md` | Discounts, codes and refunds worked out by Adminium | 879 |
+| `references/guides/discounts-and-codes--a-price-rule.md` | A price rule | 1737 |
+| `references/guides/discounts-and-codes--when-the-price-is-asked.md` | When the price is asked | 1060 |
+| `references/guides/discounts-and-codes--who-is-buying.md` | Who is buying | 728 |
+| `references/guides/discounts-and-codes--a-code-typed-on-an-order.md` | A code typed on an order | 1259 |
+| `references/guides/discounts-and-codes--what-a-save-says.md` | What a save says | 1126 |
+| `references/guides/discounts-and-codes--uses-are-recorded-once.md` | Uses are recorded once | 1003 |
+| `references/guides/discounts-and-codes--a-reduction-by-hand.md` | A reduction by hand | 596 |
+| `references/guides/discounts-and-codes--what-a-return-gives-back.md` | What a return gives back | 1136 |
+| `references/guides/discounts-and-codes--when-the-add-on-cannot-be-asked.md` | When the add-on cannot be asked | 793 |
+| `references/guides/discounts-and-codes--what-the-owner-can-change.md` | What the owner can change | 809 |
+| `references/guides/discounts-and-codes--trying-an-offer-before-it-is-on.md` | Trying an offer before it is on | 586 |
+| `references/guides/undo-a-status-move--overview.md` | Undo a status move | 827 |
+| `references/guides/undo-a-status-move--a-move-back.md` | A move back | 1481 |
+| `references/guides/undo-a-status-move--naming-the-state-it-saw.md` | Naming the state it saw | 1543 |
+| `references/guides/undo-a-status-move--only-shortly-after.md` | Only shortly after | 803 |
+| `references/guides/undo-a-status-move--stamps.md` | Stamps | 1494 |
 | `references/guides/undo-a-status-move--columns-the-move-back-empties.md` | Columns the move back empties | 1875 |
 | `references/guides/undo-a-status-move--an-email-that-waits.md` | An email that waits | 1627 |
 | `references/guides/undo-a-status-move--the-undo-button.md` | The Undo button | 1926 |
 | `references/guides/undo-a-status-move--doors-that-never-make-an-undo.md` | Doors that never make an undo | 1099 |
+| `references/guides/undo-a-status-move--after-a-posting.md` | After a posting | 634 |
 | `references/guides/undo-a-status-move--what-a-writer-is-told.md` | What a writer is told | 1077 |
 | `references/guides/undo-a-status-move--upgrading.md` | Upgrading | 441 |
 | `references/guides/shared-menu--overview.md` | A menu two apps share | 543 |
@@ -44,6 +77,7 @@
 | `references/guides/public-access--limits-on-a-stranger-s-create.md` | Limits on a stranger's create | 2319 |
 | `references/guides/public-access--a-kiosk.md` | A kiosk | 2376 |
 | `references/guides/public-access--switches-in-the-settings-row.md` | Switches in the settings row | 915 |
+| `references/guides/public-access--what-an-add-on-adds.md` | What an add-on adds | 2366 |
 | `references/guides/public-access--what-the-app-s-keys-can-never-do.md` | What the app's keys can never do | 1221 |
 | `references/guides/public-access--when-it-stops-answering.md` | When it stops answering | 710 |
 | `references/guides/public-access--origins.md` | Origins | 853 |

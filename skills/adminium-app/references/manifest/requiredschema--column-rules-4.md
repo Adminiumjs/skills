@@ -2,46 +2,6 @@
 
 # Manifest spec: requiredSchema — Column rules
 
-A rollup can also filter its child rows, keep a balance beside the total, and refuse a change
-that would take the balance below zero: what a visit's fee, its payments and its write-offs need.
-
-| Field | Rule |
-|---|---|
-| `where` | `{ "column", "eq" }`: only child rows whose column equals the value are added up (`voided` is `false`). The value must fit the column, and the column must not be nullable: a row left empty would drop out of the total unseen. |
-| `balance` | `{ "column", "of", "minus"? }`: a second column of this row, kept as `of − minus… − total` (`balance = fee − waived − paid`). `minus` lists up to 4 columns. Every column named is a number column of this table, and the balance is a column of its own, with no rules of its own. |
-| `cap` | `true`: a child write that would take the balance below zero is refused. It needs a `balance` on the same rollup, or a balance elsewhere on the row whose `minus` lists this total (a write-off is capped by the balance it lowers). |
-
-```json
-{ "ref": "paid", "type": "money", "default": 0,
-  "rules": { "rollup": { "from": "payments", "via": "visit_id", "sum": "amount",
-                         "where": { "column": "voided", "eq": false },
-                         "balance": { "column": "balance", "of": "fee", "minus": ["waived"] },
-                         "cap": true } } }
-```
-
-`of` may be another total of the row, so money given back is capped by money taken: two totals
-over the same payments, `taken` (`where` `kind` `taken`) and `given_back` (`where` `kind`
-`given_back`, `balance: { "column": "refundable", "of": "taken" }`, `cap: true`). A refund past what
-was taken is refused, and so is lowering a payment taken below what already went back.
-
-A capped write is refused with `BALANCE_EXCEEDED` and the balance it would have gone below. So is a
-change to the parent that lowers `of` under what is already paid. Only a write that takes the
-balance below zero, or further below it, is refused: a row already negative from older data can
-still be edited or voided. Two payments at once are judged one after the other, so they cannot
-both pass.
-
-A write that touches several rows of a table feeding a capped total is refused with
-`BALANCE_ONE_AT_A_TIME`, because it cannot be judged row by row. Imports and sample data are
-settled but not capped: they record what already happened.
-
-A total or a balance a writer sends is dropped, not refused, so a form that sends the whole row
-still saves.
-
-#### Totals that count and climb
-
-A total may count its child rows instead of adding a column up: how many tickets an order holds,
-how many lines a kitchen ticket has.
-
 ```json
 { "ref": "ticket_count", "type": "int", "default": 0,
   "rules": { "rollup": { "from": "tickets", "via": "order_id", "count": true,
@@ -115,3 +75,41 @@ A condition is one of:
 ```
 
 How a formula is worked out:
+
+- **Exactly.** Every value is read from its decimal text as an exact fraction, and nothing goes
+  through a floating-point number. `1 ÷ 3 × 3` is exactly 1, and a total is the same on Postgres,
+  MySQL and SQLite to the last minor unit.
+- **Rounded once**, half away from zero, to the column's [scale](https://docs.adminium.dev/reference/manifest/#decimal-places). A formula
+  column with no `scale` rounds to 0 places when it is an `int` or `bigint`, and to 4 when it is a
+  decimal. `round` inside a formula rounds that part early, where the arithmetic calls for it (a
+  tax rounded before it is added).
+- **Empty in, empty out.** An empty column makes the result empty unless `coalesce` says what to
+  read instead: a draft line with no rate yet has no amount, rather than an amount of 0 that looks
+  like a price.
+- **On every write.** A create works out every formula; an update works out the ones whose inputs
+  it changed, reading the stored row with the new values over it. A formula that reads another
+  formula column is worked out after it. A formula that reads a [rollup](https://docs.adminium.dev/reference/manifest/#totals-and-balances)
+  total is worked out again whenever the total moves.
+
+A formula fills a `decimal`, `money`, `int` or `bigint` column, never a `float` (a
+[`join`](https://docs.adminium.dev/reference/manifest/#joined-text) fills a `text` column). It reads only columns of its own table, and every
+column it counts with holds a number; `eq`, `neq` and `isNull` may name any column,
+`hoursBetween` names two different `timestamptz` columns and `daysBetween` two different `date`
+columns. It
+may not read itself, formulas may not read each other in a circle, and an expression nests at most
+8 deep. A value a writer sends to a formula column is dropped. Anything that reads another row is a
+`copy` or a `rollup`, which already keep in step when that other row changes.
+
+#### Hours between two moments
+
+`hoursBetween` works a time entry's hours out from its start and its stop:
+
+```json
+{ "ref": "hours", "type": "decimal", "scale": 2, "nullable": true,
+  "rules": { "formula": { "hoursBetween": ["started_at", "stopped_at"] } } }
+```
+
+09:15 → 11:45 is `2.50`; 22:30 → 01:15 the next day is `2.75`. The hours are exact and rounded
+once to the column's scale, like any formula, and they can be counted with further:
+`{ "mul": [{ "hoursBetween": ["started_at", "stopped_at"] }, "rate"] }` is the pay at a rate. An
+update that moves only the stop works the hours out again from the start as stored.
