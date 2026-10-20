@@ -18,7 +18,7 @@ file. Every file is 8 KB or less.
 | `references/projects/index--try-it-without-a-project.md` | Try it without a project | 786 |
 | `references/projects/index--next.md` | Next | 916 |
 | `references/projects/folder--overview.md` | The project folder | 1500 |
-| `references/projects/folder--adminium-config-ts.md` | `adminium.config.ts` | 2052 |
+| `references/projects/folder--adminium-config-ts.md` | `adminium.config.ts` | 2111 |
 | `references/projects/folder--several-databases.md` | Several databases | 1476 |
 | `references/projects/folder--env.md` | `.env` | 741 |
 | `references/projects/folder--data.md` | `data/` | 421 |
@@ -44,7 +44,9 @@ file. Every file is 8 KB or less.
 | `references/projects/pages-and-widgets--pages.md` | Pages | 2357 |
 | `references/projects/pages-and-widgets--starting-from-a-generated-page.md` | Starting from a generated page | 1275 |
 | `references/projects/pages-and-widgets--widgets.md` | Widgets | 1619 |
-| `references/projects/pages-and-widgets--the-ui-kit.md` | The UI kit | 2541 |
+| `references/projects/pages-and-widgets--the-ui-kit.md` | The UI kit | 1619 |
+| `references/projects/pages-and-widgets--the-ui-kit--the-larger-parts.md` | The UI kit — The larger parts | 5409 |
+| `references/projects/pages-and-widgets--the-ui-kit--reading-and-writing-records.md` | The UI kit — Reading and writing records | 1495 |
 | `references/projects/pages-and-widgets--react-and-other-packages.md` | React and other packages | 1085 |
 | `references/projects/pages-and-widgets--building-and-deploying.md` | Building and deploying | 752 |
 | `references/projects/deploy--overview.md` | Deploy a project | 731 |
@@ -78,7 +80,7 @@ file. Every file is 8 KB or less.
 | `references/cli/exit-codes.md` | Exit codes | 1102 |
 | `references/cli/project-files.md` | Project files | 1899 |
 | `references/cli/new.md` | `new` | 3070 |
-| `references/cli/dev.md` | `dev` | 2619 |
+| `references/cli/dev.md` | `dev` | 3010 |
 | `references/cli/design.md` | `design` | 1569 |
 | `references/cli/app-approve-build.md` | `app approve-build` | 1277 |
 | `references/cli/owner.md` | `owner` | 645 |
