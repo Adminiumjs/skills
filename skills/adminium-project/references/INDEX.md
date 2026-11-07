@@ -27,7 +27,7 @@ file. Every file is 8 KB or less.
 | `references/projects/folder--what-to-commit.md` | What to commit | 247 |
 | `references/projects/folder--what-is-in-the-folder-and-what-is-not.md` | What is in the folder, and what is not | 924 |
 | `references/projects/page-files--overview.md` | Page files | 737 |
-| `references/projects/page-files--a-page-file.md` | A page file | 3161 |
+| `references/projects/page-files--a-page-file.md` | A page file | 3181 |
 | `references/projects/page-files--a-schema-file.md` | A schema file | 1842 |
 | `references/projects/page-files--in-npm-run-dev-the-folder-wins.md` | In `npm run dev`, the folder wins | 1258 |
 | `references/projects/page-files--on-a-server-the-deploy-wins.md` | On a server, the deploy wins | 1952 |
@@ -41,7 +41,7 @@ file. Every file is 8 KB or less.
 | `references/projects/hooks-and-actions--the-db-helper.md` | The `db` helper | 1083 |
 | `references/projects/hooks-and-actions--building-and-deploying.md` | Building and deploying | 1012 |
 | `references/projects/pages-and-widgets--overview.md` | Pages and widgets | 989 |
-| `references/projects/pages-and-widgets--pages.md` | Pages | 2357 |
+| `references/projects/pages-and-widgets--pages.md` | Pages | 2377 |
 | `references/projects/pages-and-widgets--starting-from-a-generated-page.md` | Starting from a generated page | 1275 |
 | `references/projects/pages-and-widgets--widgets.md` | Widgets | 1619 |
 | `references/projects/pages-and-widgets--the-ui-kit.md` | The UI kit | 1619 |
@@ -65,9 +65,9 @@ file. Every file is 8 KB or less.
 | `references/projects/apps--run-it-from-the-folder--taking-things-out.md` | Run it from the folder — Taking things out | 2175 |
 | `references/projects/apps--run-it-from-the-folder--on-a-server.md` | Run it from the folder — On a server | 4209 |
 | `references/projects/apps--the-manifest-as-parts.md` | The manifest, as parts | 1878 |
-| `references/projects/apps--an-app-you-made-yourself.md` | An app you made yourself | 905 |
+| `references/projects/apps--an-app-you-made-yourself.md` | An app you made yourself | 920 |
 | `references/projects/apps--check-it.md` | Check it | 999 |
-| `references/projects/apps--try-it-then-pack-it.md` | Try it, then pack it | 1640 |
+| `references/projects/apps--try-it-then-pack-it.md` | Try it, then pack it | 2030 |
 | `references/projects/apps--screens-of-its-own.md` | Screens of its own | 3662 |
 
 ## cli
@@ -88,7 +88,8 @@ file. Every file is 8 KB or less.
 | `references/cli/folder-facts.md` | `folder-facts` | 595 |
 | `references/cli/build.md` | `build` | 1221 |
 | `references/cli/check.md` | `check` | 1558 |
-| `references/cli/app.md` | `app` | 6150 |
+| `references/cli/app.md` | `app` | 7528 |
+| `references/cli/workspace.md` | `workspace` | 1844 |
 | `references/cli/pull.md` | `pull` | 1333 |
 | `references/cli/eject.md` | `eject` | 1119 |
 | `references/cli/try.md` | `try` | 1463 |

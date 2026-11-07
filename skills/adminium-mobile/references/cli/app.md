@@ -124,4 +124,30 @@ larger than an upload takes (32 MB). The project's hooks and actions are not
 part of an app package.
 
 Install the file from **Studio → Hosted apps → Install an app**: upload it and
-paste the fingerprint. See [Installing apps](https://docs.adminium.dev/self-hosting/installing-apps/).
+check it against the fingerprint on the review. See [Installing apps](https://docs.adminium.dev/self-hosting/installing-apps/).
+The package also carries the app's source, stripped of anything that runs when it is built.
+
+### `app save`
+
+```
+adminium app save --connection <id> --key <key> [--name <name>] [--version <x.y.z>]
+                  [--label <text>] [--answers <file>] [--out <file>] [--plan]
+```
+
+Saves what was built on one database as an app file of your own: its tables,
+pages and views, roles, rules, mails, documents, reports, payments setup and
+public access. Another Adminium installs it through **Install an app → Upload
+file**. It is the same save as the dashboard's **Save as app**, run with host
+access.
+
+The version is the last saved version + 1 (1.0.0 the first time); a version
+saved before is never saved again. Secrets, people and history never go in. The
+command lists what the owner fills in after installing, and what it could not
+carry. When something needs a choice (a column type with no app form, a personal
+view, a value that looks like a secret), nothing is written: give the answers in
+an `--answers` JSON file shaped as `{ "include": …, "rows": …, "answers": … }`
+and run it again. `--plan` prints the list and writes nothing.
+
+It writes `<key>-<version>.tgz` (or `--out`) and prints its fingerprint. What
+travels, Check's groups and who may save what are in
+[Save as app](https://docs.adminium.dev/guides/your-own-apps/save-as-app/).
