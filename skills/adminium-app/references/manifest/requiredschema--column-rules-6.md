@@ -78,23 +78,6 @@ lower. A column may also say what a guest may upload into it (`upload`, below).
   visitor ([`pictures`](https://docs.adminium.dev/reference/manifest/#pictures)), and a sample row may give it one of the bundle's pictures,
   `{ "@asset": "<label>" }`, which the sample adds as that row's own file. An image column whose file
   rule takes any other kind is refused. An image column with no `file` rule holds links, as before.
-
-  ```json
-  { "ref": "photo", "type": "text", "nullable": true, "semantic": "image",
-    "rules": { "file": { "accept": ["png", "jpeg", "webp", "gif"], "maxBytes": 5242880 } } }
-  ```
-- **The record holds it.** Once named, the file is read with its record, by whoever reads the record
-  and reaches its row, through every column their role shows. It is changed only through the record:
-  taking it off, renaming it, throwing it away or hanging it on another record by the file routes is
-  refused `409` `FILE_HELD`, for its uploader and the owner alike. A change that names another file
-  throws the old one away; removing the record throws away its files (an undo brings them back).
-- **What a manifest cannot do with one.** A public entry neither writes nor defaults a file column, a
-  sample row leaves it empty, and a file column takes no `default`, no `unique` and no rule that
-  decides its value (`personal`, `required` and `requiredWhen` are fine). The kit's
-  [signature pad and photo field](https://docs.adminium.dev/guides/apps/kit-parts/#a-signature-and-photos) upload for such a
-  column from an app's own screen.
-
-#### Totals and balances
-
-A rollup can also filter its child rows, keep a balance beside the total, and refuse a change
-that would take the balance below zero: what a visit's fee, its payments and its write-offs need.
+  A column of one product asset (a `file` rule with no `maxCount` whose `accept` names only `svg`,
+  `glb`, `stl`, `3mf` or `woff2`) likewise takes one of the bundle's SVGs or models of a kind it accepts.
+  A sample ships no fonts: a column that takes only `woff2` is left empty by a sample row.
