@@ -37,3 +37,28 @@ Switching an app on or off changes more than its screens, when the app says so i
 - **What waits for money on its way.** An order whose customer is paying is not moved to "pay when
   you pick up instead" while the bank is still confirming the payment; the customer is told to
   wait.
+
+### Try an app as a customer
+
+Before you go live, walk an app's own checkout yourself. In **Studio → Payments → Apps that can take
+payments**, **Try {app} as a customer** switches rehearsal on for you and opens the app's customer
+screens on this server's address. You need the right to set up payments. Rehearsal works whether
+or not the app is switched on, and ends by itself after four hours, or when you click **Stop
+rehearsing** on the TEST band.
+
+While it is on, for you alone:
+
+- The app shows **Pay now**, and its pay page takes test payments only.
+- Every row you make, on the app's customer screens or its staff screens, is sample data.
+  **Remove sample data** takes it all away. A test payment is written into the app's tables like
+  a real one, but only on such a row; a test payment never reaches a real order.
+- The app's emails about those rows come to you, marked `[TEST]` in the subject, never to the
+  address on the order. They carry what a customer's would (Adminium 0.3.63): the order's own link,
+  and a test pay link that opens for you on this server's address. The test link is the one your
+  checkout already opened while it works, else a new one for an hour.
+- An email about a real row stays an ordinary email while you rehearse (Adminium 0.3.63). A note
+  you add to a real order, or a message you queue about one, goes to the real customer as it always
+  would, unmarked, with payments as they really are. Only a row you made in your rehearsal, and
+  still sample data, sends its email to you.
+- An email to you never carries the link of a row you did not make in your rehearsal, and a real
+  customer's email never carries a test link.
