@@ -41,6 +41,46 @@ its parcel goes. The country must hold a two-letter ISO code; Adminium never gue
 
 Buying a label never moves the order's status. A label bought with a test key reaches neither column.
 
+### Parcels going abroad
+
+An order is refused a label to another country unless its entry has a `customs` block and the shop's
+owner has listed that country. The block needs Adminium 0.3.74 or later.
+
+```json
+"customs": {
+  "currency": "currency",
+  "lines": {
+    "table": "order_lines",
+    "order": "order_id",
+    "quantity": "qty",
+    "unitValue": "unit_price",
+    "description": "product_name",
+    "unitWeight": "grams",
+    "weightUnit": "g",
+    "product": { "column": "product_id", "table": "products", "sku": "code" }
+  }
+}
+```
+
+| Field | Required | What it is |
+|---|---|---|
+| `lines.table` | yes | The table holding the order's goods. |
+| `lines.order` | yes | Its column naming the order. |
+| `lines.quantity` | yes | A whole-number column. |
+| `lines.unitValue` | one of | A `decimal` or `money` column: what one unit was sold for. |
+| `lines.description` | yes | Text or enum. The line's own name is declared first. The shop's customs description fills in only a line with none. |
+| `lines.sku` | no | A text column on the line. |
+| `lines.product` | no | Where a line's SKU is kept when the line has none: its column, the products table and that table's text column. |
+| `lines.unitWeight`, `lines.weightUnit` | no | One unit's net weight and `g` or `kg`, both or neither. Without them the parcel's weight is shared across its units. When only some lines have a weight, the order cannot be declared. |
+| `lines.lineTotal` | one of | What the customer paid for the whole line, in place of `unitValue`, for a line priced as a whole. One unit's value is worked out from it, exact to six places. |
+| `lines.unlessSet` | no | A column of the line that, once filled, means the line is not in the parcel (`cancelled_at`). Such a line is never declared. |
+| `lines.unless` | no | `{ "column", "in": [...] }`: a text or enum column of the line, and the values that mean it is not in the parcel (`{ "column": "stage", "in": ["cancelled"] }`). An empty value is a line still in it. An enum column must be able to hold each value. |
+| `currency` | no | The order's column holding its currency. Without it the shop's customs currency is used, and the order cannot be declared while that differs from the database's currency. |
+| `refunded` | no | A `decimal` or `money` column of the order holding what was refunded. While it is above zero the declared values are not what the customer paid, so the order cannot be declared. |
+| `placedAt` | no | A time column of the order saying when it was placed. Once the shop's currency has changed, an order with no `currency` of its own is declared only if this shows it was placed after the change. Without it, such an order cannot be declared. |
+
+Quantities and values are read from these columns and cannot be changed by a request.
+
 An app's role can be given three rights on this install's labels. They need the `shipping` block
 and Adminium 0.3.72 or later. The install's check lists each one, ticked, and an update that adds
 one asks first.
